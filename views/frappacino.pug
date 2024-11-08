@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1= title
+  p My name is Braeden
+  - let results = [{size: 'Large', brand: 'Starbucks', orderNum: 123},{size: 'Medium', brand: 'Scooters', orderNum: 456},{size: 'Small', brand: 'Dunkin Donuts', orderNum: 789}];  
+
+  .container-fluid
+    .row
+      each item, index in results
+        .col-sm-2
+          h4 #{item.orderNum}
+          p Brand: #{item.brand}
+          p Size: #{item.size}
+          div(class="item" onclick=`buy(${index})`)
+          button(onclick=`buy(${index})`) Buy Item #{item.orderNum}
+
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}`);
+    }

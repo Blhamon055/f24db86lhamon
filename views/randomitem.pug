@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  - var image_names = ['DunkinDrink.jpeg', 'ScootersFrap.jpg', 'ScootersNotFrap.jpg', 'StarbucksFrapFresh.jpeg', 'starbucksFrapPackaged.jpeg']
+  - console.log("Made the array");
+  - for (var i=0; i<3; i++)
+    - var random_index = Math.floor(Math.random() * 5)
+    - console.log("begun for loop and finished random generation");
+    img(
+      src = `/images/${image_names[random_index]}`,
+      alt = `/${image_names[random_index]}`,
+      height = "200",
+      width = "200"
+    )
