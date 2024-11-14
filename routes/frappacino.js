@@ -3,5 +3,5 @@ const frappacino_controller = require('../controllers/frappacino');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', frappacino_controller.frappacino_view_all_Page);
+router.get('/frappacino/:id', frappacino_controller.frappacino_detail);
 module.exports = router;
