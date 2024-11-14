@@ -3,11 +3,11 @@ extends layout
 block content
   h1= title
   p My name is Braeden
-  - let results = [{size: 'Large', brand: 'Starbucks', orderNum: 123},{size: 'Medium', brand: 'Scooters', orderNum: 456},{size: 'Small', brand: 'Dunkin Donuts', orderNum: 789}];  
-
+  - let resultsFrapp = results;
+  
   .container-fluid
     .row
-      each item, index in results
+      each item, index in resultsFrapp
         .col-sm-2
           h4 #{item.orderNum}
           p Brand: #{item.brand}
