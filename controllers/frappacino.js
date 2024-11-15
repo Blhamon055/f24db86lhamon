@@ -40,13 +40,25 @@ exports.frappacino_create_post = async function(req,res) {
 		catch(err){
 		res.status(500);
 		res.send(`{"error": ${err}}`);	
-		}	
+		}
 };
 
 exports.frappacino_delete = function(req, res) {
 	res.send('NOT IMPLEMENTED: Frappacino delete DELETE ' + req.params.id);
 };
 
-exports.frappacino_update_put = function(req, res) {
-	res.send('NOT IMPLEMENTED: Frappacino update PUT' + req.params.id);
+exports.frappacino_update_put = async function(req, res) {
+	console.log('update on id ${req.params.id} with body${JSON.stringify(req.obdy)}');
+	try {
+		let toUpdate = await Frappacino.findById(req.params.id);
+		if(req.body.size) {toUpdate.size = req.body.size;}
+		if(req.body.brand) {toUpdate.brand = req.body.brand;}
+		if(req.body.orderNum) {toUpdate.orderNum = req.body.orderNum;}
+		let result = await toUpdate.save();
+		console.log("Success " + result);
+		res.send(result);
+	} catch (err) {
+		res.status(500);
+		res.send('{"error":${err}: Update for id ${req.params.id} failed');
+	}
 };
