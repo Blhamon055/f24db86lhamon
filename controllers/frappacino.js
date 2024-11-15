@@ -48,7 +48,7 @@ exports.frappacino_delete = function(req, res) {
 };
 
 exports.frappacino_update_put = async function(req, res) {
-	console.log('update on id ${req.params.id} with body${JSON.stringify(req.obdy)}');
+	console.log('update on id ${req.params.id} with body ${JSON.stringify(req.body)}');
 	try {
 		let toUpdate = await Frappacino.findById(req.params.id);
 		if(req.body.size) {toUpdate.size = req.body.size;}
@@ -59,6 +59,6 @@ exports.frappacino_update_put = async function(req, res) {
 		res.send(result);
 	} catch (err) {
 		res.status(500);
-		res.send('{"error":${err}: Update for id ${req.params.id} failed');
+		res.send('{"error":${err}: Update for id ${req.params.id} failed}');
 	}
 };
