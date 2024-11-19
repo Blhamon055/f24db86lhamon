@@ -1,0 +1,31 @@
+extends layout 
+
+block content
+    h1=title
+
+    form(id='FrappacinoForm', action='/resource/frappacino', method="POST")
+        div.form-group
+            label.frappacinoAttr(for='frappacinosize') Frappacino Size
+            input#size(type='text', name='frappacinosize')
+        div.form-group
+            label.frappacinoAttr(for='frappacinobrand') Frappacino Brand 
+            input#brand(type='text', name='frappacinobrand')
+        div.form-group
+            label.frappacinoAttr(for='frappacinoorderNum') Frappacino Order Number
+            input#orderNum(type='number', name='frappacinoorderNum')
+        input(type='submit')
+
+    script.
+        document.forms['FrappacinoForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            fetch(event.target.action, {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Save succeeded")
+            }).catch((error) => {
+                alert("Save failed " + error )
+            });
+        });

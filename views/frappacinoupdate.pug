@@ -1,0 +1,40 @@
+extends layout
+
+block content 
+    h1=title
+
+    - let frappacinoid = toShow._id
+    - let frappacinosize = toShow.size
+    - let frappacinobrand = toShow.brand
+    - let frappacinoorderNum = toShow.orderNum
+
+    div.row(class='mb-2')
+        div.mr-1 ID is
+        div #{frappacinoid}
+    - let actionid = "/resource/frappacino/" + frappacinoid
+    form(id='FrappacinoForm', action=actionid, method="PUT")
+        div.form-group 
+            label.frappacinoAttr(for='size') Frappacino name
+            input#frappacinosize(type='text', name='frappacinosize', value=frappacinosize)
+        div.form-group
+            label.frappacinoAttr(for='brand') Frappacino brand
+            input#frappacinobrand(type='text', name='frappacinobrand', value=frappacinobrand)
+        div.form-group
+            label.frappacinoAttr(for='orderNum') Frappacino order number
+            input#frappacinoorderNum(type='number', name='frappacinoorderNum', value=frappacinoorderNum)
+        input(type="submit")
+
+    script.
+        document.forms['FrappacinoForm'].addEventListener('submit', (event) => {
+            event.preventDefault();
+            fetch(event.target.action, {
+                method: 'PUT',
+                body: new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("Save succeded")
+            }).catch((error) => {
+                alert("Save failed " + error )
+            });
+        });

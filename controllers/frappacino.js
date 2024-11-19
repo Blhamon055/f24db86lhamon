@@ -83,14 +83,37 @@ exports.frappacino_view_one_Page = async function(req, res) {
 	}
 };
 
-exports.costume_create_Page = function(req, res) {
-	console.log("create view")
+exports.frappacino_create_Page = function(req, res) {
+	console.log("frappacino view")
 	try{
-	res.render('costumecreate', { title: 'Costume Create'});
+	res.render('frappacinocreate', { title: 'Frappacino Create'});
 	}
 	catch(err){
 	res.status(500)
 	res.send(`{'error': '${err}'}`);
 	}
 };
-	
+
+exports.frappacino_update_Page = async function(req, res) {
+	console.log("update view for item "+req.query.id)
+	try{
+		let result = await Frappacino.findById(req.query.id);
+		res.render('frappacinoupdate', { title: 'Frappacino Update', toShow: result });
+	}
+	catch(err){
+		res.status(500);
+		res.send(`{'error': '${err}'}`);
+	}
+};
+
+exports.frappacino_delete_Page = async function(req, res) {
+	console.log("Delete view for id " + req.query.id)
+	try{
+		result = await Costume.findById(req.query.id);
+		res.render('frappacinodelete', { title: 'Frappacino Delete', toShow: result });
+	}
+	catch(err){
+		res.status(500);
+		res.send(`{'error': '${err}'}`);
+	}
+};
