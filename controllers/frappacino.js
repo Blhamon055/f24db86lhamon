@@ -19,7 +19,7 @@ exports.frappacino_detail = async function(req, res) {
 		res.send(result);
 	} catch(error) {
 		res.status(500);
-		res.send('{"error":document for id ${req.params.id} not found');
+		res.send(`{"error":document for id ${req.params.id} not found`);
 	}
 };
 
@@ -43,12 +43,20 @@ exports.frappacino_create_post = async function(req,res) {
 		}
 };
 
-exports.frappacino_delete = function(req, res) {
-	res.send('NOT IMPLEMENTED: Frappacino delete DELETE ' + req.params.id);
+exports.frappacino_delete = async function(req, res) {
+	console.log("delete " + req.params.id);
+	try {
+		result = await Frappacino.findByIdAndDelete(req.params.id);
+		console.log("Removed " + result);
+		res.send(result);
+	} catch(err) {
+		res.status(500);
+		res.send('{"error": Error deleting ${err}}');
+	}
 };
 
 exports.frappacino_update_put = async function(req, res) {
-	console.log('update on id ${req.params.id} with body ${JSON.stringify(req.body)}');
+	console.log(`update on id ${req.params.id} with body ${JSON.stringify(req.body)}`);
 	try {
 		let toUpdate = await Frappacino.findById(req.params.id);
 		if(req.body.size) {toUpdate.size = req.body.size;}
@@ -59,6 +67,30 @@ exports.frappacino_update_put = async function(req, res) {
 		res.send(result);
 	} catch (err) {
 		res.status(500);
-		res.send('{"error":${err}: Update for id ${req.params.id} failed}');
+		res.send(`{"error":${err}: Update for id ${req.params.id} failed}`);
 	}
 };
+
+exports.frappacino_view_one_Page = async function(req, res) {
+	console.log("single view for id " + req.query.id)
+	try{
+		result = await Frappacino.findById(req.query.id)
+		res.render('frappacinodetail', { title: 'Frappacino Detail', toShow: result });
+	}
+	catch(err){
+		res.status(500);
+		res.send(`{'error': '${err}'}`);
+	}
+};
+
+exports.costume_create_Page = function(req, res) {
+	console.log("create view")
+	try{
+	res.render('costumecreate', { title: 'Costume Create'});
+	}
+	catch(err){
+	res.status(500)
+	res.send(`{'error': '${err}'}`);
+	}
+};
+	
