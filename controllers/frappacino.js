@@ -109,7 +109,7 @@ exports.frappacino_update_Page = async function(req, res) {
 exports.frappacino_delete_Page = async function(req, res) {
 	console.log("Delete view for id " + req.query.id)
 	try{
-		result = await Costume.findById(req.query.id);
+		result = await Frappacino.findById(req.query.id);
 		res.render('frappacinodelete', { title: 'Frappacino Delete', toShow: result });
 	}
 	catch(err){
