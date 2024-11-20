@@ -2,21 +2,23 @@ extends layout
 
 block content 
   h1=title
-
-  - let frappacinoid = toShow._id
-  - let frappacinosize = toShow.size
-  - let frappacinobrand = toShow.brand
-  - let frappacinoorderNum = toShow.orderNum
-  div
-    div.row
-      div(class='frappacinoAttr mr-3') Frappacino ID is:
-      div #{frappacinoid}
-    div.row
-      div(class='frappacinoAttr mr-3') Frappacino size is:
-      div #{frappacinosize}
-    div.row
-      div(class='frappacinoAttr mr-3') Frappacino brand is:
-      div #{frappacinobrand}
-    div.row
-      div(class='frappacinoAttr mr-3') Frappacino order number is:
-      div #{frappacinoorderNum}
+  if(toShow == null)
+    h2 No instance to detail
+  else 
+    - let frappacinoid = toShow._id
+    - let frappacinosize = toShow.size
+    - let frappacinobrand = toShow.brand
+    - let frappacinoorderNum = toShow.orderNum
+    div
+      div.row
+        div(class='frappacinoAttr mr-3') Frappacino ID is:
+        div #{frappacinoid}
+      div.row
+        div(class='frappacinoAttr mr-3') Frappacino size is:
+        div #{frappacinosize}
+      div.row
+        div(class='frappacinoAttr mr-3') Frappacino brand is:
+        div #{frappacinobrand}
+      div.row
+        div(class='frappacinoAttr mr-3') Frappacino order number is:
+        div #{frappacinoorderNum}

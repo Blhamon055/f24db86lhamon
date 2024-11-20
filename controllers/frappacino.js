@@ -98,7 +98,9 @@ exports.frappacino_update_Page = async function(req, res) {
 	console.log("update view for item "+req.query.id)
 	try{
 		let result = await Frappacino.findById(req.query.id);
-		res.render('frappacinoupdate', { title: 'Frappacino Update', toShow: result });
+		res.render('frappacinoupdate', { hello: 'Welcome to the update page of my collection!',
+			title: 'Frappacino Update', 
+			instructions: 'Below is the information listed for the id of the element you entered into the url! Change one or more of the values in each box and then click the update button!', toShow: result });
 	}
 	catch(err){
 		res.status(500);
