@@ -5,14 +5,14 @@ block content
 
     form(id='FrappacinoForm', action='/resource/frappacino', method="POST")
         div.form-group
-            label.frappacinoAttr(for='frappacinosize') Frappacino Size
-            input#size(type='text', name='frappacinosize')
+            label.frappacinoAttr(for='size') Frappacino Size
+            input#size(type='text', name='size')
         div.form-group
-            label.frappacinoAttr(for='frappacinobrand') Frappacino Brand 
-            input#brand(type='text', name='frappacinobrand')
+            label.frappacinoAttr(for='brand') Frappacino Brand 
+            input#brand(type='text', name='brand')
         div.form-group
-            label.frappacinoAttr(for='frappacinoorderNum') Frappacino Order Number
-            input#orderNum(type='number', name='frappacinoorderNum')
+            label.frappacinoAttr(for='orderNum') Frappacino Order Number
+            input#orderNum(type='number', name='orderNum')
         input(type='submit')
 
     script.
@@ -22,7 +22,7 @@ block content
                 method: 'POST',
                 body: new URLSearchParams(new FormData(event.target))
             }).then((resp) => {
-                return resp.json();
+                return resp.text(); //something fails here
             }).then((body) => {
                 alert("Save succeeded")
             }).catch((error) => {

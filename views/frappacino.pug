@@ -8,14 +8,19 @@ block content
   .container-fluid
     .row
       each item, index in resultsFrapp
+        - let destination = `dispatch(\"/frappacino/update?id=${item._id}\")`
         .col-sm-2
           h4 #{item.orderNum}
           p Brand: #{item.brand}
           p Size: #{item.size}
           div(class="item" onclick=`buy(${index})`)
           button(onclick=`buy(${index})`) Buy Item #{item.orderNum}
+          button.btn(class="btn-primary ml-1", onclick=destination) Update
 
   script.
     function buy(index) {
       alert(`You purchased item ${index}`);
+    }
+    function dispatch(path) {
+      window.location.href=path;
     }

@@ -1,7 +1,7 @@
 var Frappacino = require('../models/frappacino');
 
 
-exports.frappacino_view_all_Page = async function(req, res) {
+exports.frappacino_list = async function(req, res) {
 	try{
 		theFrapps = await Frappacino.find();
 		res.send(theFrapps);
@@ -30,16 +30,16 @@ exports.frappacino_create_post = async function(req,res) {
 		// Even though bodies can be in many different formats, we will be picky
 		// and require that it be a json object
 		// {"costume_type":"goat", "cost":12, "size":"large"}
-		document.costume_type = req.body.size;
-		document.cost = req.body.brand;
-		document.size = req.body.orderNum;
+		document.size = req.body.size;
+		document.brand = req.body.brand;
+		document.orderNum = req.body.orderNum;
 		try{
-		let result = await document.save();
-		res.send(result);
+			let result = await document.save();
+			res.send(result);
 		}
 		catch(err){
-		res.status(500);
-		res.send(`{"error": ${err}}`);	
+			res.status(500);
+			res.send(`{"error": ${err}}`);	
 		}
 };
 
@@ -71,6 +71,17 @@ exports.frappacino_update_put = async function(req, res) {
 	}
 };
 
+exports.frappacino_view_all_Page = async function(req, res) {
+	try{
+		theFrapps = await Frappacino.find();
+		res.render('frappacino', {title: 'Frappacino Search Results', results: theFrapps});
+	}
+	catch(err){
+		res.status(500);
+		res.send(`{"error": ${err}}`);
+	}
+};
+
 exports.frappacino_view_one_Page = async function(req, res) {
 	console.log("single view for id " + req.query.id)
 	try{
@@ -86,11 +97,11 @@ exports.frappacino_view_one_Page = async function(req, res) {
 exports.frappacino_create_Page = function(req, res) {
 	console.log("frappacino view")
 	try{
-	res.render('frappacinocreate', { title: 'Frappacino Create'});
+		res.render('frappacinocreate', { title: 'Frappacino Create'});
 	}
 	catch(err){
-	res.status(500)
-	res.send(`{'error': '${err}'}`);
+		res.status(500)
+		res.send(`{'error': '${err}'}`);
 	}
 };
 
