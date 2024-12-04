@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  - let destinationCreate = `dispatch(\"/frappacino/create")`
+  button.btn(class="btn-primary ml-1", onclick=destinationCreate) Create Item
   h1= title
   p My name is Braeden
   - let resultsFrapp = results;
@@ -9,6 +11,8 @@ block content
     .row
       each item, index in resultsFrapp
         - let destination = `dispatch(\"/frappacino/update?id=${item._id}\")`
+        - let destinationDetail = `dispatch(\"/frappacino/detail?id=${item._id}\")`
+        - let destinationDelete = `dispatch(\"/frappacino/delete?id=${item._id}\")`
         .col-sm-2
           h4 #{item.orderNum}
           p Brand: #{item.brand}
@@ -16,6 +20,8 @@ block content
           div(class="item" onclick=`buy(${index})`)
           button(onclick=`buy(${index})`) Buy Item #{item.orderNum}
           button.btn(class="btn-primary ml-1", onclick=destination) Update
+          button.btn(class="btn-primary ml-1", onclick=destinationDetail) Detail Info
+          button.btn(class="btn-primary ml-1", onclick=destinationDelete) Delete Item
 
   script.
     function buy(index) {
