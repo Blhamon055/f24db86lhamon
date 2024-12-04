@@ -16,7 +16,7 @@ router.post('/register', function(req, res) {
     if(user != null ){
       console.log("exists " + req.body.username)
       return res.render('register', { title: 'Registration',
-      message: 'Existing User', account : req.body.username })
+      message: 'There is already an existing user! :(', account : req.body.username })
     }
     let newAccount = new Account({ username : req.body.username });
     Account.register(newAccount, req.body.password, function(err, user){
